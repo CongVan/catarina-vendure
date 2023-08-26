@@ -5,7 +5,7 @@ import { nonAngularUiExtensions } from './ui-extensions/ui-extensions';
 
 if (require.main === module) {
     // Called directly from command line
-    customAdminUi({ recompile: false, devMode: false })
+    customAdminUi({ recompile: true, devMode: false })
         .compile?.()
         .then(() => {
             process.exit(0);
