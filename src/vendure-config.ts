@@ -117,7 +117,7 @@ export const config: VendureConfig = {
       port: 3002,
       adminUiConfig: {
         apiHost: process.env.SERVER_URL,
-        apiPort: 3000,
+        // apiPort: 3000,
       },
       app: customAdminUi({ recompile: !IS_PROD, devMode: !IS_PROD }),
     }),
