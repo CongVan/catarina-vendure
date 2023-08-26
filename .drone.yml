@@ -1,0 +1,26 @@
+kind: pipeline
+name: default
+
+steps:
+  - name: docker
+    image: plugins/docker
+    # environment:
+    #   PASSWORD:
+    #     from_secret: password
+    #   USERNAME:
+    #     from_secret: username
+    settings:
+      username: 
+        from_secret: docker_username
+      password: 
+        from_secret: docker_password
+      repo: congvan203/catarina-vendure
+      tags:
+        - latest
+  - name: bash
+    image: bash
+    commands:
+      - cd /home/admin/apps/catarina-vendure; make      
+trigger:
+  branch:
+    - main

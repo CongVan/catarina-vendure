@@ -1,0 +1,18 @@
+version: "3"
+services:
+  server:
+    image: congvan203/catarina-vendure
+    ports:
+      - 3000:3000
+    command: ["yarn", "start:server"]
+    volumes:
+      - ./data
+  worker:
+    image: congvan203/catarina-vendure
+    command: ["yarn", "start:worker"]
+    volumes:
+      - ./data
+networks:
+  default:
+    external: true
+    name: main-network
