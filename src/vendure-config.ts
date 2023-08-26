@@ -17,7 +17,7 @@ import path from "path";
 import { ReviewsPlugin } from "./plugins/reviews/reviews-plugin";
 import { customAdminUi } from "./compile-admin-ui";
 
-const IS_DEV = process.env.APP_ENV === "dev";
+const IS_PROD = path.basename(__dirname) === "dist";
 
 export const config: VendureConfig = {
   apiOptions: {
@@ -27,18 +27,14 @@ export const config: VendureConfig = {
     // The following options are useful in development mode,
     // but are best turned off for production for security
     // reasons.
-    ...(IS_DEV
-      ? {
-          adminApiPlayground: {
-            settings: { "request.credentials": "include" } as any,
-          },
-          adminApiDebug: true,
-          shopApiPlayground: {
-            settings: { "request.credentials": "include" } as any,
-          },
-          shopApiDebug: true,
-        }
-      : {}),
+    adminApiPlayground: {
+      settings: { "request.credentials": "include" } as any,
+    },
+    adminApiDebug: true,
+    shopApiPlayground: {
+      settings: { "request.credentials": "include" } as any,
+    },
+    shopApiDebug: true,
   },
   authOptions: {
     tokenMethod: ["bearer", "cookie"],
@@ -121,9 +117,9 @@ export const config: VendureConfig = {
       port: 3002,
       adminUiConfig: {
         apiHost: process.env.SERVER_URL,
-        // apiPort: 3000,
+        apiPort: 3000,
       },
-      app: customAdminUi({ recompile: IS_DEV, devMode: IS_DEV }),
+      app: customAdminUi({ recompile: !IS_PROD, devMode: !IS_PROD }),
     }),
     ReviewsPlugin,
   ],
