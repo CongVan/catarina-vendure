@@ -45,6 +45,7 @@ export const config: VendureConfig = {
     cookieOptions: {
       secret: process.env.COOKIE_SECRET,
     },
+    requireVerification: false,
   },
   dbConnectionOptions: {
     type: "postgres",
@@ -117,7 +118,7 @@ export const config: VendureConfig = {
       port: 4002,
       adminUiConfig: {
         apiHost: process.env.SERVER_URL,
-        // apiPort: 3000,
+        // apiPort: 3000,=
       },
       app: customAdminUi({ recompile: false, devMode: !IS_PROD }),
     }),
